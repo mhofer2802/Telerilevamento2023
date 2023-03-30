@@ -1,1 +1,13 @@
+library(raster)
+setwd("C:/lab/") # Windows
+l1992<- brick("defor1_.png")#imagine landset del 1992
+l1992#pixel 341292 moltiplicato per 3 sono le bande
+plotRGB(l1992, r=1, g=2, b=3, stretch="Lin")#vegetazione =rosso=riflette tanto=bando infrarosso--> infrarosso=banda1
+plotRGB(l1992, r=4, g=3, b=2, stretch="Lin")
+export: 1, 2, 3#prima banda=NIR, acqua assorbe tutto infraroso, verebbe fuori quasi nera, peró é blu=sorridi di sciolti/non é pulita
+
+#calcolare un indicce di vegetazione:
+dvi1992=l1992[[1]]-l1992[[2]]
+dvi1992
+dev.off()
 
