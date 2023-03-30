@@ -6,8 +6,41 @@ plotRGB(l1992, r=1, g=2, b=3, stretch="Lin")#vegetazione =rosso=riflette tanto=b
 plotRGB(l1992, r=4, g=3, b=2, stretch="Lin")
 export: 1, 2, 3#prima banda=NIR, acqua assorbe tutto infraroso, verebbe fuori quasi nera, peró é blu=sorridi di sciolti/non é pulita
 
+#importing he most recent image
+l2006<-brick("defor2_.png")
+plotRGB(l2006, r=1, g=2, b=3, stretch="Lin")
+
+#exercise: plot the image from 1992 ontop of that of 2006
+par(mfrow=c(2,1))
+plotRGB(l1992, r=1, g=2, b=3, stretch="lin")
+plotRGB(l2006, r=1, g=2, b=3, stretch="lin")
+#exercise: plot the image from 1992 beside of that of 2006
+par(mfrow=c(1,2))
+plotRGB(l1992, r=1, g=2, b=3, stretch="lin")
+plotRGB(l2006, r=1, g=2, b=3, stretch="lin")
+
 #calcolare un indicce di vegetazione:
+#1992
 dvi1992=l1992[[1]]-l1992[[2]]
 dvi1992
+cl <- colorRampPalette(c('darkblue','yellow','red','black'))(100) # specifying a color scheme
+plot(dvi1992, col=cl)
 dev.off()
+#2006
+dvi2006=l2006[[1]]-l2006[[2]]
+dvi2006
+plot(dvi2006, col=cl)
+cl <- colorRampPalette(c('darkblue','yellow','red','black'))(100) # specifying a color scheme
+
+#multitemporal analysis
+difdiv = dvi1992 - dvi2006
+cld <- colorRampPalette(c('blue','white','red'))(100)
+plot(difdvi, col=cld)
+
+# Range DVI (8 bit): -255 a 255
+#Range DVI (16 bit): -65535 a 65535
+#neutralizzare il dvi # Hence, NDVI can be used to compare images with a different radiometric resolution
+#Range NDVI (8 bit): -1 a 1 #-1=vegetazione morta
+
+
 
