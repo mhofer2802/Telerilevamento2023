@@ -10,7 +10,34 @@ library(RStoolbox)
 
 library(raster)
 setwd("C:/lab/")
-so<-brick(Solar_Orbiter_s_first_views_of_the_Sun_pillars)
+so<-brick("Solar_Orbiter_s_first_views_of_the_Sun_pillars.jpg")
 
 plotRGB(so, 1, 2, 3, stretch="lin")
 plotRGB(so, 1, 2, 3, stretch="hist")
+
+
+# 1. Get all the single values
+singlenr <- getValues(so)
+singlenr
+# set.seed(99)
+
+# 2. Classify
+kcluster <- kmeans(singlenr, centers = 3)
+kcluster
+
+# 3. Set values to a raster on the basis of so
+soclass <- setValues(so[[1]], kcluster$cluster) # assign new values to a raster object
+#plot la classificazione
+cl <- colorRampPalette(c('yellow','black','red'))(100)
+plot(soclass, col=cl)
+#class 2(nero): highest energy level
+#class 1(giallo): lowest energy level
+#class 3 (rosso): medium energy level
+
+frequencies<- freq(soclass)
+tot = 2221440
+percentages = frequencies * 100 /  tot
+percentages
+#class 2(nero): highest energy level: 21.21%
+#class 1(giallo): lowest energy level:37.33%
+#class 3 (rosso): medium energy level:41.45%
