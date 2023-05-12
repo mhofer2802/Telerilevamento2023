@@ -10,3 +10,11 @@ setwd("C:/lab/") #Windows
 #https://land.copernicus.vgt.vito.be/PDF/portal/Application.html
 
 #dataset: c_gls_SSM1km_202305090000_CEURO_S1CSAR_V1.2.1.nc
+
+ssoil <- raster("c_gls_SSM1km_202305090000_CEURO_S1CSAR_V1.2.1.nc")#un solo strato
+
+ssoil
+plot(ssoil)
+
+scd<-as.data.frame(ssoil,xy=T)
+head(scd)
