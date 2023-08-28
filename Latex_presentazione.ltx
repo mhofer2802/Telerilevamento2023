@@ -1,0 +1,213 @@
+%% stolen from a latex template ;)
+\documentclass[pdf]{beamer}
+
+%\mode<presentation>{\usetheme{Warsaw}}
+
+\usepackage{pgfpages}
+%\setbeameroption{show notes on second screen}
+
+\usepackage[utf8]{inputenc}
+\usepackage{xeCJK}
+\usepackage{graphicx}
+\usepackage {mathtools}
+\usepackage{gensymb}
+\usepackage{utopia} %font utopia imported
+\usetheme{Ilmenau}
+
+\usepackage{framed,color,verbatim}
+\definecolor{shadecolor}{rgb}{.9, .9, .9}
+
+\newenvironment{code}%
+   {\snugshade\verbatim}%
+   {\endverbatim\endsnugshade}
+
+% set colors
+\definecolor{myNewColorA}{RGB}{119, 221, 119} % pastellgrün
+\definecolor{myNewColorB}{RGB}{169,169,169} 
+\definecolor{myNewColorC}{RGB}{47,87,47} 
+\setbeamercolor*{palette primary}{bg=myNewColorC}
+\setbeamercolor*{palette secondary}{bg=myNewColorB, fg = white}
+\setbeamercolor*{palette tertiary}{bg=myNewColorA, fg = white}
+\setbeamercolor*{titlelike}{fg=myNewColorC}
+\setbeamercolor*{title}{bg=myNewColorA, fg = white}
+\setbeamercolor*{item}{fg=myNewColorA}
+\setbeamercolor*{caption name}{fg=myNewColorA}
+\setbeamercolor{section in toc}{fg=black}
+\setbeamercolor{subsection in toc}{fg=black}
+\usefonttheme{professionalfonts}
+\usepackage{natbib}
+\usepackage{hyperref}
+
+%------------------------------------------------------------
+%\titlegraphic{\includegraphics[height=2cm]{logo.png}} 
+
+\setbeamerfont{title}{size=\large}
+\setbeamerfont{subtitle}{size=\small}
+\setbeamerfont{author}{size=\small}
+\setbeamerfont{date}{size=\small}
+\setbeamerfont{institute}{size=\small}
+\title{A woody retrospective}
+\subtitle{A brief overview on Dry Matter Productivity of the Trentino-Alto Adige region in the last decade (2010 - 2019)}  %% Change project title here
+\author{Mirjam Hofer} %% Change author name here
+
+\institute{}
+
+\date[\textcolor{white}{29 August 2023}]  %% Change presentation date here
+{29 August 2023}
+
+%------------------------------------------------------------
+%This block of commands puts the table of contents at the 
+%beginning of each section and highlights the current section:
+%\AtBeginSection[]
+%{
+%  \begin{frame}
+%    \frametitle{Contents}
+%    \tableofcontents[currentsection]
+%  \end{frame}
+%}
+%------------------------------------------------------------
+
+\begin{document}
+
+%The next statement creates the title page.
+\frame{\titlepage}
+\begin{frame}
+\frametitle{Contents}
+\tableofcontents
+\end{frame}
+%------------------------------------------------------------
+\section{Introduction}
+    \begin{frame}{Introduction}
+    \begin{itemize}
+        \item This work is carried out for the course TELERILEVAMENTO GEO-ECOLOGICO (93457)
+        \item The goal of this assignment is to monitor temporal changes in forest vegetation in the Trentino-Alto Adige region
+        \item In this case, the chosen vegetation index is Dry Matter Productivity (DMP) which is closely related to the Net Primary Productivity and gives insight on the biomass increase of the vegetation \footnote{\tiny \url{https://land.copernicus.eu/global/products/dmp}}
+    \end{itemize}
+    \end{frame}
+
+    \begin{frame}{Research Questions}
+        \begin{enumerate}
+            \item How does Dry Matter Productivity change over the years? \\
+            Is there a link to climate change?
+            \item Can some changes be attributed to extreme climatic events (e. g. Storm Vaia)?
+        \end{enumerate}
+    \end{frame}
+
+
+\section{Methods}
+
+\begin{frame}{Getting the data}
+    \begin{itemize}
+        \item .nc files were downloaded from the Copernicus Global Land Service website ({\tiny \url{https://land.copernicus.vgt.vito.be/PDF/portal/Application.html}})
+        \item Images were chosen from the 21$^{st}$ to the 30$^{th}$ of June for the years 2010 to 2019
+        \end{itemize}
+
+    \vspace{2 em}
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/Annotation 2023-08-16 205711.jpg}
+\end{frame}
+
+\begin{frame}[fragile]{Data elaboration}
+\begin{enumerate}
+    \item Loading data\footnote{\tiny x corresponds to 1-9 for the years 2010-19} \\
+        \begin{code}
+DMP_201x <- raster("201x.nc")\end{code}
+
+    \item Crop images to Trentino-Alto Adige coordinates
+        \begin{code}
+ext <- c(9.5, 13, 45.5, 47.5)
+
+DMP_AA_1x <- crop(DMP_201x, ext)\end{code}
+
+    \item Creating the dataframe
+\begin{code}   
+AA_1x_df <- as.data.frame(DMP_AA_1x, xy = T)
+\end{code}
+\end{enumerate}
+\end{frame}
+
+\section{Results}
+    \begin{frame}{Dry matter productivity (2010 - 2019)}
+	\includegraphics[width=\textwidth]{images/2010_DMP.png}
+    \end{frame}
+
+    \begin{frame}{Dry matter productivity (2010 - 2019)}
+	\includegraphics[width=\textwidth]{images/2011_DMP.png}
+    \end{frame}
+
+    \begin{frame}{Dry matter productivity (2010 - 2019)}
+	\includegraphics[width=\textwidth]{images/2012_DMP.png}
+    \end{frame}
+
+    \begin{frame}{Dry matter productivity (2010 - 2019)}
+	\includegraphics[width=\textwidth]{images/2013_DMP.png}
+    \end{frame}
+
+    \begin{frame}{Dry matter productivity (2010 - 2019)}
+	\includegraphics[width=\textwidth]{images/2014_DMP.png}
+    \end{frame}
+
+    \begin{frame}{Dry matter productivity (2010 - 2019)}
+	\includegraphics[width=\textwidth]{images/2015_DMP.png}
+    \end{frame}
+
+    \begin{frame}{Dry matter productivity (2010 - 2019)}
+	\includegraphics[width=\textwidth]{images/2016_DMP.png}
+    \end{frame}
+
+    \begin{frame}{Dry matter productivity (2010 - 2019)}
+	\includegraphics[width=\textwidth]{images/2017_DMP.png}
+    \end{frame}
+
+    \begin{frame}{Dry matter productivity (2010 - 2019)}
+	\includegraphics[width=\textwidth]{images/2018_DMP.png}
+    \end{frame}
+
+    \begin{frame}{Dry matter productivity (2010 - 2019)}
+	\includegraphics[width=\textwidth]{images/2019_DMP.png}
+    \end{frame}
+
+    \begin{frame}{Influence of Vaia}
+        What are the effects of the storm Vaia (October-November 2018)?
+
+        \pause
+
+        Let's take a look at the NDVI of this area from before (mid-October) and after (mid-November) the storm Vaia!
+    \end{frame}
+
+    \begin{frame}{Influence of Vaia}
+       \includegraphics[width=\textwidth]{images/bv.png} 
+    \end{frame}
+
+    \begin{frame}{Influence of Vaia}
+       \includegraphics[width=\textwidth]{images/av.png} 
+    \end{frame}
+
+
+\section{Conclusion}
+        \begin{frame}{Summary and Conclusion}
+    \begin{enumerate}
+ \item Dry matter productivity showed an increasing trend over the years, with exception in the years 2013 and 2018
+ \begin{itemize}
+     \item In the beginning of June 2013, there was a ten-day heatwave, followed by snow from 700/1000 m.a.s.l. in the second half of the month.
+     \item 2018 had above average temperatures (e. g. in May there were two nights with temperatures above 20 \degree C, in July there was a ten-day heatwave)
+ \end{itemize}
+ \item The effect of storm Vaia was not evident in Dry Matter Productivity time series, however a closer look at the NDVI before and after the storm showed differences.
+ \begin{itemize}
+     \item Further work could include other vegetation indices and different measurement intervals
+ \end{itemize}
+ 
+    \end{enumerate}
+\end{frame}
+\begin{frame}{}
+
+\begin{center}
+\huge{Thank you for your attention!}
+\end{center}
+
+\end{frame}
+
+\end{document}
+
+
+
